@@ -21,11 +21,11 @@ history.go(-1);
 <script type = "text/javascript">
 function check(){
 	form = document.write_form
-	if(!form.subject.value || form.subject.value.indexOf(" ")>=0){
+	if(form.subject.value.trim() == 0){
 		alert("제목을 입력하세요");
 		
 		return false;
-	}else if(!form.content.value || form.content.value.indexOf(" ")>=0){
+	}else if(form.content.value.trim() == 0){
 		alert("내용을 입력하세요");
 		
 		return false;

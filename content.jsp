@@ -10,6 +10,17 @@
 <title>Insert title here</title>
 </head>
 <body>
+<script type="text/javascript">
+/* function comment_update(comment_num){
+	window.name = "parentform";
+	window.open = "comment_update_servlet?num=" + comment_num,
+			"updateform", "width=500, height=300, resizable = no, scrollbars = no");
+} */
+function doDisplay(form){
+	var form = document.getElementById(form);
+	form.style.display=(form.style.display='block') ? 'none' : 'block';
+}
+</script>
 <%
 if(session.getAttribute("ID") == null){
 %>
@@ -77,9 +88,9 @@ function goUpdate(){
 <br><%= content.replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") %><br></td></tr>
 <tr><td>
 
+
 <table width="600" border="0" cellspacing="0" cellpadding="0">
 <tr>
-
 <%
 for(int i= 0; i< comment_list.size() ;i++){
 %>
@@ -91,10 +102,15 @@ for(int i= 0; i< comment_list.size() ;i++){
 <%
 if(session.getAttribute("ID").equals(comment_list.get(i).getID())){
 %>
-<td align = "right"><a href = "comment_delete_servlet?num=<%=num%>&comment_num=<%=comment_list.get(i).getComment_num() %>">삭제</a>
+<td align = "right">
+<!-- style = "display =none; display= block; " visibility: visible-->
+<a href = "comment_delete_servlet?num=<%=num%>&comment_num=<%=comment_list.get(i).getComment_num() %>">삭제</a>
+
+
 <%
 }%>
-</td></tr>
+</td>
+</tr>
 <tr><td colspan="2" height="2" bgcolor="#c0c0c0"></td></tr>
 <%
 }
@@ -104,7 +120,7 @@ if(session.getAttribute("ID").equals(comment_list.get(i).getID())){
 <!-- 댓글달기 -->
 <script type="text/javascript">
 function goComment(){
-	if(!document.comment_form.comment_content.value || document.comment_form.comment_content.value.indexOf(" ")>=0){
+	if(document.comment_form.comment_content.value.trim() == 0){
 		alert("내용을 입력하세요");
 		
 		return false;

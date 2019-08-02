@@ -17,8 +17,7 @@
 </script>
 <script type="text/javascript">
 	function check() {
-		if (!document.search_form.search_text.value
-				|| document.search_form.search_text.value.indexOf(" ") >= 0) {
+		if (document.search_form.search_text.value.trim() == 0) {
 			alert("검색어를 입력하세요");
 
 			return false;
@@ -139,18 +138,22 @@
 				<%
 					if (nowPage != 1) {
 				%> <a
-				href="main.jsp?nowPage=<%=nowPage - 1%>&search=<%=search%>&search_text=<%=search_text%>">이전
-					페이지</a> <%
+				href="main.jsp?nowPage=<%=nowPage - 1%>&search=<%=search%>&search_text=<%=search_text%>">이전</a>&nbsp;&nbsp; <%
  	}
  	for (int i = startPage; i <= endPage; i++) {
+ 		if (nowPage == i) {
  %> <a
+				href="main.jsp?nowPage=<%=i%>&search=<%=search%>&search_text=<%=search_text%>"><b><%=i%></b></a>
+				<%
+					} else {
+				%> <a
 				href="main.jsp?nowPage=<%=i%>&search=<%=search%>&search_text=<%=search_text%>"><%=i%></a>
 				<%
 					}
+					}
 					if (nowPage != totalPage) {
-				%><a
-				href="main.jsp?nowPage=<%=nowPage + 1%>&search=<%=search%>&search_text=<%=search_text%>">다음
-					페이지</a> <%
+				%>&nbsp;&nbsp;<a
+				href="main.jsp?nowPage=<%=nowPage + 1%>&search=<%=search%>&search_text=<%=search_text%>">다음</a> <%
  	}
  %>
 			</td>
