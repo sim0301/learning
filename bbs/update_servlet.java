@@ -6,19 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class logout_servlet
+ * Servlet implementation class update_servlet
  */
-@WebServlet("/logout_servlet")
-public class logout_servlet extends HttpServlet {
+@WebServlet("/update_servlet")
+public class update_servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public logout_servlet() {
+    public update_servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,16 +35,25 @@ public class logout_servlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
+		int num = Integer.parseInt(request.getParameter("num"));
+		
 		try {
-		HttpSession session = request.getSession();
-		session.invalidate();
-
-		response.sendRedirect("login_form.jsp");
+		dto update = new dto();
+		update.setSubject(request.getParameter("subject"));
+		update.setContent(request.getParameter("content"));
+		update.setNum(Integer.parseInt(request.getParameter("num")));
+	
+		dao up = new dao();
+		up.update(update);
+		
+		response.sendRedirect("/practice/content_servlet?num=" + num);
 		
 		}catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("예외 발생 ::" +e.getMessage());
 		}
+	
 	}
 
 }

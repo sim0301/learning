@@ -1,6 +1,7 @@
 package bbs;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,20 +37,26 @@ public class write_servlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/html;charset=utf-8");
-		HttpSession session = request.getSession();
+		
+		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession(false);
 		session.getAttribute("ID");
 		
-		member_info content = new member_info();
+		try {
+		dto content = new dto();
 		content.setID((String)session.getAttribute("ID"));
 		content.setSubject(request.getParameter("subject"));
 		content.setContent(request.getParameter("content"));
 		
-		
-		signup up = new signup();
+		dao up = new dao();
 		up.write(content);
 		
 		response.sendRedirect("main.jsp");
+		
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("예외 발생 ::" +e.getMessage());
+		}
 	}
 
 }

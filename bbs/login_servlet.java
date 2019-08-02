@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bbs.signup;
+import bbs.dao;
 
 /**
  * Servlet implementation class login_servlet
@@ -41,32 +41,37 @@ public class login_servlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
-		
+		try {
+			
 		String ID = request.getParameter("ID");
 		String password = request.getParameter("password");
 		
-
-		signup result = new signup();
+		dao result = new dao();
 		int check = result.loginCheck(ID, password);
+		
 		if(check == 1){
 			
 			session.setAttribute("ID",ID);
-			
 			response.sendRedirect("main.jsp");
+			
 		}else if(check == 0){
 			
-			out.println("<script>");
+			out.println("<script type = \"text/javascript\">");
 			out.println("alert('패스워드를 확인하세요');");
 			out.println("history.back()");
 			out.println("</script>");
 			
 			
 		}else{
-			out.println("<script>");
+			out.println("<script type = \"text/javascript\">");
 			out.println("alert('등록되지 않은 아이디입니다.');");
 			out.println("history.back()");
 			out.println("</script>");
-	}
+		}
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("예외 발생 ::" +e.getMessage());
+		}
 
 }
 }

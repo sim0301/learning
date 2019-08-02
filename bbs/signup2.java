@@ -2,10 +2,10 @@ package bbs;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -22,7 +22,7 @@ public class signup2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
-	private ResultSet rs;
+	
        
     /**
      * @see HttpServlet#HttpServlet()

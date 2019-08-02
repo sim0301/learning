@@ -41,8 +41,8 @@ public class signup_servlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setCharacterEncoding("UTF-8");
 		
-	
-		member_info in = new member_info();
+	try {
+		dto in = new dto();
 		in.setID(request.getParameter("ID"));
 		in.setPassword(request.getParameter("password"));
 		in.setName(request.getParameter("name"));
@@ -51,12 +51,16 @@ public class signup_servlet extends HttpServlet {
 		in.setMail(request.getParameter("mail"));
 		in.setPhone(request.getParameter("phone"));
 		
-		
-		
-		signup info = new signup();
+		dao info = new dao();
 		info.insert(in);
 		
 		response.sendRedirect("/practice/login_form.jsp");
+		
+	}catch (Exception e) {
+
+		e.printStackTrace();
+		System.out.println("예외 발생 ::" +e.getMessage());
+	}
 	
 	}
 }

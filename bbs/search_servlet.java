@@ -1,24 +1,25 @@
 package bbs;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class logout_servlet
+ * Servlet implementation class search_servlet
  */
-@WebServlet("/logout_servlet")
-public class logout_servlet extends HttpServlet {
+@WebServlet("/search_servlet")
+public class search_servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public logout_servlet() {
+    public search_servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +29,20 @@ public class logout_servlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doPost(request, response);
+
+		request.setCharacterEncoding("utf-8");
+		try {
+		String search = request.getParameter("search");
+		String search_text = request.getParameter("search_text");
+		
+		RequestDispatcher go = request.getRequestDispatcher("/main.jsp?search=" + search + "&search_text=" + search_text);
+        go.forward(request, response);
+        
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("예외 발생 ::" +e.getMessage());
+		}
+		
 	}
 
 	/**
@@ -36,16 +50,7 @@ public class logout_servlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		try {
-		HttpSession session = request.getSession();
-		session.invalidate();
-
-		response.sendRedirect("login_form.jsp");
-		
-		}catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("예외 발생 ::" +e.getMessage());
-		}
+		doGet(request, response);
 	}
 
 }
