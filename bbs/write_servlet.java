@@ -42,7 +42,6 @@ public class write_servlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		session.getAttribute("ID");
 		
-		try {
 		dto content = new dto();
 		content.setID((String)session.getAttribute("ID"));
 		content.setSubject(request.getParameter("subject"));
@@ -53,10 +52,7 @@ public class write_servlet extends HttpServlet {
 		
 		response.sendRedirect("main.jsp");
 		
-		}catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("예외 발생 ::" +e.getMessage());
-		}
+		
 	}
 
 }

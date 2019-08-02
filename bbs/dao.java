@@ -210,6 +210,7 @@ public class dao {
 		}
 	}
 
+	
 	// comment 작성
 	public void comment(dto comment) {
 		try {
@@ -298,6 +299,7 @@ public class dao {
 		}
 	}
 
+	
 	// 글 수정
 	public void update(dto up) {
 		try {
@@ -310,6 +312,24 @@ public class dao {
 			pstmt.setInt(3, up.getNum());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
+			System.out.println("데이터 입력 오류.. 원인 ::" + e.getMessage());
+		} finally {
+
+			disconnect();
+		}
+	}
+	
+	//댓글 수정
+	public void update_comment(dto up) {
+		try {
+			connect();
+			
+			String sql = "update comment set conmment_content = ? where comment_num = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, up.getComment_content());
+			pstmt.setInt(2, up.getComment_num());
+			pstmt.executeUpdate();
+		}catch (SQLException e) {
 			System.out.println("데이터 입력 오류.. 원인 ::" + e.getMessage());
 		} finally {
 
@@ -367,6 +387,48 @@ public class dao {
 	}
 
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*//내가 쓴 글
+	public ArrayList<dto> myContent(String ID) {
+		ArrayList<dto> list = new ArrayList<dto>();
+		
+		try {
+			connect();
+			
+			String sql = "select * from board where ID = ?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, ID);
+			rs = pstmt.executeQuery();
+		
+			while (rs.next()) {
+				dto bbs = new dto();
+				bbs.setNum(rs.getInt(1));
+				bbs.setSubject(rs.getString(2));
+				bbs.setContent(rs.getString(3));
+				bbs.setHit(rs.getInt(4));
+				bbs.setDate(rs.getString(5));
+				bbs.setID(rs.getString(6));
+				list.add(bbs);
+			}
+		}catch (SQLException e) {
+			System.out.println("데이터 입력 오류.. 원인 ::" + e.getMessage());
+		} finally {
+
+			disconnect();
+		}
+		return list;
+	}
+*/
+
+	/*//회원정보 수정
 	public void info(String ID) {
 
 		try {
@@ -396,5 +458,7 @@ public class dao {
 		}
 
 	}
-
+*/
+	
+	
 }
