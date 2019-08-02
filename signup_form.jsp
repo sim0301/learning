@@ -8,7 +8,7 @@
 <title>Sign up</title>
 </head>
 <body>
-<script language="JavaScript">
+<script type = "text/javascript">
 function check(){
 	form = document.signup_form
 	if(!form.ID.value || form.ID.value.indexOf(" ")>=0){
@@ -44,42 +44,33 @@ function check(){
 	form.submit();
 }
 </script>
-<script>
-function goLogin(){
-	location.href = "signup_servlet";
-}
-</script>
 
-
-<form name="signup_form" method="post" action="signup_servlet"  >
-
-
+<form name="signup_form" method="post" action="signup_servlet">
 <h1>회원가입</h1>
 <hr>
 
-아이디<br>
+* 아이디<br>
 <input type="text" ID="ID" name="ID" size = "15">
 <br>
 
-패스워드 <br>
+* 패스워드 <br>
 <input type="password" ID="password" name="password" size="15">
 <br>
-이름<br>
+* 이름<br>
 <input type="text" ID="name" name="name" size = "15">
 <br>
-생년월일<br>
+* 생년월일<br>
 <input type="text" ID="birth" name="birth" size = "15">
 <br>
-
-휴대전화<br>
+* 휴대전화<br>
 <input type="text" id="phone" name="phone" size = "15">
 <br>
-성별<br> <select id="gender" name="gender" >
+* 성별<br> <select id="gender" name="gender" >
 <option value="M"> 남자 </option>
 <option value="F"> 여자 </option>
 </select>
 <br>
-메일<br>
+* 메일<br>
 <input type="email" id="mail" name="mail" size = "15">
 <br>
 <br>

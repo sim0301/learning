@@ -10,15 +10,6 @@
 
 <h1><a href = "main.jsp">SIM&nbsp;BBS</a></h1> 
 
-<form name = "serch_form" method="get" action="">
-<select name = "serch">
-<option value = "all">전체</option>
-<option value = "subject">제목</option>
-<option value = "name">작성자</option>
-</select>
-<input type = "text" ID = "serch_text" name="serch_text" value="">
-<input type = "submit" value="검색">
-</form>
 <%
 if(session.getAttribute("ID") == null){
 	%>
