@@ -11,16 +11,16 @@
 <body>
 <script type = "text/javascript">
 function check(){
-if(document.login_form.ID.value.trim() == 0) {
-	alert("ID를 입력하세요");
+	if(!document.login_form.ID.value || document.login_form.ID.value.indexOf(" ")>=0) {
+		alert("ID를 입력하세요");
 	
-	return false;
-}else if(document.login_form.password.value.trim() == 0){
-	alert("password를 입력하세요");
+		return false;
+	}else if(!document.login_form.password.value || document.login_form.password.value.indexOf(" ")>=0) {
+		alert("password를 입력하세요");
 	
-	return false;
-}
-login_form.submit();
+		return false;
+	}
+	document.login_form.submit();
 }
 </script>
 

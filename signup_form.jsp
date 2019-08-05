@@ -11,32 +11,32 @@
 <script type = "text/javascript">
 function check(){
 	form = document.signup_form
-	if(form.ID.value.trim() == 0){
+	if(!form.ID.value || form.ID.value.indexOf(" ")>=0){
 		alert("ID를 입력하세요");
 		
 		return false;
 	}
-	else if(form.password.value.trim() == 0){
+	else if(!form.password.value || form.ID.password.indexOf(" ")>=0){
 		alert("패스워드를 입력하세요");
 		
 		return false;
 	}
-	else if(form.name.value.trim() == 0){
+	else if(!form.name.value || form.name.value.indexOf(" ")>=0){
 		alert("이름을 입력하세요");
 		
 		return false;
 	}
-	else if(form.birth.value.trim() == 0){
+	else if(!form.birth.value || form.birth.value.indexOf(" ")>=0){
 		alert("생년월일을 입력하세요");
 		
 		return false;
 	}
-	else if(form.phone.value.trim() == 0){
+	else if(!form.phone.value || form.phone.value.indexOf(" ")>=0){
 		alert("전화번호를 입력하세요");
 		
 		return false;
 	}
-	else if(form.mail.value.trim() == 0){
+	else if(!form.mail.value || form.mail.value.indexOf(" ")>=0){
 		alert("메일을 입력하세요");
 		
 		return false;
