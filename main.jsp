@@ -76,12 +76,22 @@
 			int countList = 5;//한 화면에 표시될 게시물 수
 			int countPage = 5;//한 화면에 표시될 페이지 수
 
-			//게시물
 			int totalCount = dao.total(search, search_text); //전체 게시물 수 
+			int totalPage = totalCount / countList;//전체 페이지 수
+			
+			if (totalCount % countList > 0) {
+				totalPage++;
+			}
+			if (totalPage < nowPage) {
+				nowPage = totalPage;
+			}
+			
+
+			//게시물
 			int beginNum = (nowPage - 1) * countList;//페이지에서 시작될 게시물 번호
 			int endNum = beginNum + countList;
+
 			//페이지
-			int totalPage = totalCount / countList;//전체 페이지 수
 			/* int startPage = ((nowPage - 1)/countPage) * countPage + 1; */
 			int startPage = nowPage - (countPage / 2);
 			int endPage = startPage + countPage - 1;
@@ -90,12 +100,6 @@
 			if (nowPage <= (countPage / 2)) {
 				startPage = 1;
 				endPage = startPage + countPage - 1;
-			}
-			if (totalCount % countList > 0) {
-				totalPage++;
-			}
-			if (totalPage < nowPage) {
-				nowPage = totalPage;
 			}
 			if (endPage > totalPage) {
 				endPage = totalPage;
@@ -138,11 +142,12 @@
 				<%
 					if (nowPage != 1) {
 				%> <a
-				href="main.jsp?nowPage=<%=nowPage - 1%>&search=<%=search%>&search_text=<%=search_text%>">이전</a>&nbsp;&nbsp; <%
- 	}
- 	for (int i = startPage; i <= endPage; i++) {
- 		if (nowPage == i) {
- %> <a
+				href="main.jsp?nowPage=<%=nowPage - 1%>&search=<%=search%>&search_text=<%=search_text%>">이전</a>&nbsp;&nbsp;
+				<%
+					}
+					for (int i = startPage; i <= endPage; i++) {
+						if (nowPage == i) {
+				%> <a
 				href="main.jsp?nowPage=<%=i%>&search=<%=search%>&search_text=<%=search_text%>"><b><%=i%></b></a>
 				<%
 					} else {
@@ -153,9 +158,10 @@
 					}
 					if (nowPage != totalPage) {
 				%>&nbsp;&nbsp;<a
-				href="main.jsp?nowPage=<%=nowPage + 1%>&search=<%=search%>&search_text=<%=search_text%>">다음</a> <%
- 	}
- %>
+				href="main.jsp?nowPage=<%=nowPage + 1%>&search=<%=search%>&search_text=<%=search_text%>">다음</a>
+				<%
+					}
+				%>
 			</td>
 		</tr>
 		<tr>
